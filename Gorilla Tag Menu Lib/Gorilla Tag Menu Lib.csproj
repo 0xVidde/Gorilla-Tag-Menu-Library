@@ -247,10 +247,11 @@
   <ItemGroup>
     <Compile Include="MainClass.cs" />
     <Compile Include="Menu Lib\ButtonCollisionHandler.cs" />
-    <Compile Include="Menu Lib\ButtonEnum.cs" />
+    <Compile Include="Menu Lib\ButtonTemplate.cs" />
     <Compile Include="Menu Lib\MenuCore.cs" />
     <Compile Include="Menu Lib\MenuLogger.cs" />
     <Compile Include="Menu Lib\MenuTemplate.cs" />
+    <Compile Include="Menu Lib\PageTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

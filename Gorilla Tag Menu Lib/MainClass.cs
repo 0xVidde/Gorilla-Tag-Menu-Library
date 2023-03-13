@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using Gorilla_Tag_Menu_Lib.Menu_Lib;
 using HarmonyLib;
 using Menu_Library;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace Gorilla_Tag_Mod_Menu_Library
     {
         private const string modGUID = "GT.Menu.Lib";
         private const string modName = "An Example For Vidde's Gorilla Tag Menu Library";
-        private const string modVersion = "0.0.1";
+        private const string modVersion = "0.0.2";
 
         public void Awake()
         {
@@ -31,9 +32,25 @@ namespace Gorilla_Tag_Mod_Menu_Library
         static bool init = true;
 
         // The function that's ran when a button is pressed
+        private static void IncreasePage()
+        {
+            if (menu.currentPage + 1 > menu.menuPages.Count)
+                return;
+
+            menu.currentPage = menu.currentPage + 1;
+        }
+
+        private static void DecreasePage()
+        {
+            if (menu.currentPage - 1 < menu.menuPages.Count)
+                return;
+
+            menu.currentPage = menu.currentPage - 1;
+        }
+
         private static void TEST()
         {
-            Debug.Log("Random Number: " + Random.Range(1, 10000));
+            Debug.Log("TEST");
         }
 
         static void Prefix(GorillaLocomotion.Player __instance)
@@ -43,10 +60,37 @@ namespace Gorilla_Tag_Mod_Menu_Library
                 // menu innit                   // Title              // Size            // Colour                     // Where you want the menu to be
                 menu = MenuTemplate.CreateMenu("Hello World", new Vector3(0.1f, 1f, 1f), Color.black, GorillaLocomotion.Player.Instance.leftHandTransform.gameObject);
 
-                // Button Init                                // Button Name     // The button action
-                ButtonEnum testButton = ButtonEnum.CreateButton("Test Button", new System.Action(TEST));
+                // Creating pages
+                PageTemplate page1 = PageTemplate.CreatePage();
+                PageTemplate page2 = PageTemplate.CreatePage();
 
-                menu.AddButton(testButton);
+                // Creating buttons for page 1
+                ButtonTemplate[] page1Buttons =
+                {
+                    ButtonTemplate.CreateButton("Page >>", IncreasePage, false),
+                    ButtonTemplate.CreateButton("<< Page", DecreasePage, false),
+                    ButtonTemplate.CreateButton("Page 1 Test 1", TEST),
+                    ButtonTemplate.CreateButton("Page 1 Test 2", TEST),
+                    ButtonTemplate.CreateButton("Page 1 Test 3", TEST)
+                };
+
+                // Creating buttons for page 2
+                ButtonTemplate[] page2Buttons =
+                {
+                    ButtonTemplate.CreateButton("Page >>", IncreasePage, false),
+                    ButtonTemplate.CreateButton("<< Page", DecreasePage, false),
+                    ButtonTemplate.CreateButton("Page 2 Test 1", TEST),
+                    ButtonTemplate.CreateButton("Page 2 Test 2", TEST),
+                    ButtonTemplate.CreateButton("Page 2 Test 3", TEST)
+                };
+
+                // Adding the buttons to the pages
+                page1.AddButton(page1Buttons);
+                page2.AddButton(page2Buttons);
+
+                // Adding the pages to the menu
+                menu.AddPage(page1);
+                menu.AddPage(page2);
 
                 init = false;
             }

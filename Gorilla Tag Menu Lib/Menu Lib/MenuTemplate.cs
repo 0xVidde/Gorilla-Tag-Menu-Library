@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Gorilla_Tag_Menu_Lib.Menu_Lib;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,45 +7,56 @@ namespace Menu_Library
 {
     public class MenuTemplate
     {
-        public string  menuTitle;
-        public Vector3 menuSize;
-        public Color   menuColor;
+        public string       menuTitle;
+        public Vector3      menuSize;
+        public Color        menuColor;
 
-        public List<ButtonEnum> menuBtns = new List<ButtonEnum>();
+        public GameObject   menuPivotPoint;
 
-        public GameObject pivotPoint;
+        public GameObject   menuRoot;
+        public GameObject   reference;
+        public GameObject   canvas;
+        public float        framePressCooldown = 0;
 
-        public GameObject menuRoot;
-        public GameObject reference;
-        public GameObject canvas;
-        public float framePressCooldown = 0;
+        public int currentPage;
 
-        public static MenuTemplate CreateMenu(string title, Vector3 size, Color color, GameObject pivot)
+        public List<PageTemplate> menuPages = new List<PageTemplate>();
+
+
+        public static MenuTemplate CreateMenu(string newTitle, Vector3 newSize, Color newColor, GameObject newPivot)
         {
-            MenuTemplate menu = new MenuTemplate();
-            menu.menuTitle = title;
-            menu.menuSize = size;
-            menu.menuColor = color;
-            menu.pivotPoint = pivot;
+            MenuTemplate newMenu = new MenuTemplate();
 
-            MenuLogger.Log("Created Menu: " + title);
+            newMenu.menuTitle = newTitle;
+            newMenu.menuSize = newSize;
+            newMenu.menuColor = newColor;
+            newMenu.menuPivotPoint = newPivot;
 
-            return menu;
+            newMenu.currentPage = 0;
+
+            MenuLogger.Log("Created Menu: " + newTitle);
+
+            return newMenu;
         }
 
-        public void AddButton(ButtonEnum button)
+        public void AddPage(PageTemplate page)
         {
-            menuBtns.Add(button);
+            menuPages.Add(page);
 
             MenuLogger.Log("Added Button To " + menuTitle);
         }
 
-        public void AddButton(ButtonEnum[] buttons)
+        public void AddPage(PageTemplate[] page)
         {
-            foreach (ButtonEnum button in buttons)
+            foreach (PageTemplate pageToAdd in menuPages)
             {
-                AddButton(button);
+                AddPage(pageToAdd);
             }
+        }
+
+        public PageTemplate GetCurrentPage()
+        {
+            return menuPages[currentPage];
         }
     }
 }

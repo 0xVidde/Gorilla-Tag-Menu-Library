@@ -1,6 +1,29 @@
-﻿using System.Collections.Generic;
+﻿using Gorilla_Tag_Menu_Lib.Menu_Lib;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
+/*
+ 
+--   = Proposition
+-=-  = Info
+==>  = Examples of uses
+
+TODO:
+
+-- Add a page system, more info:
+-=- DrawCall() Will not handle the drawing of buttons, it will draw pages and the actual page objects will themselfs handle their own buttons instead of buttons being global within the menu object example functions:
+==> SetPage(int page); ChangePageBy(int page) (1, -1)
+
+-- More button / page configurability
+-=- More configurability of how the buttons are rendered on the menu (the page when that's implemented)
+==> page.spaceBetweenButtons, button.btnWidth, button.btnHeight
+
+-- Menu animation
+-=- Ability to animate the menu, like adding a fast scaling up animation when first opening the menu. Will add animation presets
+==> AddStartAnim(AnimEnum anim, float animSpeed); AddOpeningAnim(AnimEnum anim, float animSpeed)
+
+*/
 
 namespace Menu_Library
 {
@@ -18,7 +41,13 @@ namespace Menu_Library
                 {
                     menu.reference = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                     Destroy(menu.reference.GetComponent<MeshRenderer>());
-                    menu.reference.transform.parent = GorillaLocomotion.Player.Instance.rightHandTransform;
+                    
+                    // Probably exists a better way of doing this lol
+                    if (menu.menuPivotPoint == GorillaLocomotion.Player.Instance.rightHandTransform)
+                        menu.reference.transform.parent = GorillaLocomotion.Player.Instance.leftHandTransform;
+                    else
+                        menu.reference.transform.parent = GorillaLocomotion.Player.Instance.rightHandTransform;
+
                     menu.reference.transform.localPosition = new Vector3(0f, -0.1f, 0f);
                     menu.reference.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
                 }
@@ -34,8 +63,8 @@ namespace Menu_Library
 
             if (menuStateDepender && menu.menuRoot)
             {
-                menu.menuRoot.transform.position = menu.pivotPoint.transform.position;
-                menu.menuRoot.transform.rotation = menu.pivotPoint.transform.rotation;
+                menu.menuRoot.transform.position = menu.menuPivotPoint.transform.position;
+                menu.menuRoot.transform.rotation = menu.menuPivotPoint.transform.rotation;
             }
         }
 
@@ -85,48 +114,65 @@ namespace Menu_Library
             titleTransform.position = new Vector3(0.06f, 0f, 0.175f);
             titleTransform.rotation = Quaternion.Euler(new Vector3(180f, 90f, 90f));
 
+            MenuLogger.Log(menu.currentPage.ToString());
+
             DrawButtons(menu);
         }
 
         private static void DrawButtons(MenuTemplate menu)
         {
-            int index = 0;
+            int btnIndex = 0;
+            int pageIndex = 0;
 
-            foreach (ButtonEnum button in menu.menuBtns)
+            foreach (PageTemplate page in menu.menuPages)
             {
-                GameObject buttonRoot = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                if (pageIndex == menu.currentPage)
+                {
+                    foreach (ButtonTemplate button in page.pageButtons)
+                    {
+                        GameObject buttonRoot = GameObject.CreatePrimitive(PrimitiveType.Cube);
 
-                Destroy(buttonRoot.GetComponent<Rigidbody>());
-                buttonRoot.AddComponent<ButtonCollisionHandler>().button = button;
-                buttonRoot.GetComponent<ButtonCollisionHandler>().menu = menu;
-                buttonRoot.GetComponent<BoxCollider>().isTrigger = true;
+                        Destroy(buttonRoot.GetComponent<Rigidbody>());
+                        buttonRoot.AddComponent<ButtonCollisionHandler>().button = button;
+                        buttonRoot.GetComponent<ButtonCollisionHandler>().menu = menu;
+                        buttonRoot.GetComponent<BoxCollider>().isTrigger = true;
 
-                buttonRoot.transform.parent = menu.menuRoot.transform;
-                buttonRoot.transform.rotation = Quaternion.identity;
-                buttonRoot.transform.localScale = new Vector3(0.09f, 0.5f, 0.08f);
-                buttonRoot.transform.localPosition = new Vector3(0.56f, 0f, 0.28f - (index * 0.13f));
+                        buttonRoot.transform.parent = menu.menuRoot.transform;
+                        buttonRoot.transform.rotation = Quaternion.identity;
+                        buttonRoot.transform.localScale = new Vector3(page.btnHeight, page.btnWidth, 0.08f);
+                        buttonRoot.transform.localPosition = new Vector3(0.56f, 0f, 0.28f - (btnIndex * 0.13f));
 
-                GameObject titleObj = new GameObject();
-                titleObj.transform.parent = menu.canvas.transform;
-                Text title = titleObj.AddComponent<Text>();
-                title.font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
-                title.text = button.btnTitle;
-                title.fontSize = 1;
-                title.alignment = TextAnchor.MiddleCenter;
-                title.resizeTextForBestFit = true;
-                title.resizeTextMinSize = 0;
-                RectTransform titleTransform = title.GetComponent<RectTransform>();
-                titleTransform.localPosition = Vector3.zero;
-                titleTransform.sizeDelta = new Vector2(0.2f, 0.03f);
-                titleTransform.localPosition = new Vector3(0.064f, 0f, 0.111f - ((index * 0.13f) / 2.55f));
-                titleTransform.rotation = Quaternion.Euler(new Vector3(180f, 90f, 90f));
+                        GameObject titleObj = new GameObject();
+                        titleObj.transform.parent = menu.canvas.transform;
+                        Text title = titleObj.AddComponent<Text>();
+                        title.font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
+                        title.text = button.btnTitle;
+                        title.fontSize = 1;
+                        title.alignment = TextAnchor.MiddleCenter;
+                        title.resizeTextForBestFit = true;
+                        title.resizeTextMinSize = 0;
+                        RectTransform titleTransform = title.GetComponent<RectTransform>();
+                        titleTransform.localPosition = Vector3.zero;
+                        titleTransform.sizeDelta = new Vector2(0.2f, 0.03f);
+                        titleTransform.localPosition = new Vector3(0.064f, 0f, 0.111f - ((btnIndex * page.btnSpace) / 2.55f));
+                        titleTransform.rotation = Quaternion.Euler(new Vector3(180f, 90f, 90f));
 
-                if (button.state)
-                    buttonRoot.GetComponent<Renderer>().material.color = Color.green;
-                else
-                    buttonRoot.GetComponent<Renderer>().material.color = Color.red;
+                        if (button.btnState)
+                            buttonRoot.GetComponent<Renderer>().material.color = Color.green;
+                        else
+                            buttonRoot.GetComponent<Renderer>().material.color = Color.red;
 
-                index++;
+                        if (button.btnDisabled)
+                            buttonRoot.GetComponent<Renderer>().material.color = Color.black;
+
+                        if (!button.btnWillToggle)
+                            buttonRoot.GetComponent<Renderer>().material.color = Color.gray;
+
+                        btnIndex++;
+                    }
+                }
+
+                pageIndex++;
             }
         } 
 

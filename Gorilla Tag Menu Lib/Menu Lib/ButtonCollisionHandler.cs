@@ -4,18 +4,22 @@ namespace Menu_Library
 {
     class ButtonCollisionHandler : MonoBehaviour
     {
-        public ButtonEnum button;
+        public ButtonTemplate button;
         public MenuTemplate menu;
 
         private void OnTriggerEnter(Collider collider)
         {
             if (Time.frameCount >= menu.framePressCooldown + 30)
             {
-                foreach (ButtonEnum btn in menu.menuBtns)
+                foreach (ButtonTemplate btn in menu.menuPages[menu.currentPage].pageButtons)
                 {
                     if (btn == button)
                     {
-                        btn.state = !btn.state;
+                        if (btn.btnDisabled)
+                            return;
+
+                        if (btn.btnWillToggle)
+                            btn.btnState = !btn.btnState;
 
                         btn.btnAction.Invoke();
 
