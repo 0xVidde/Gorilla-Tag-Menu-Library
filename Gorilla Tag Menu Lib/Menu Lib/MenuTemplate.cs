@@ -18,7 +18,7 @@ namespace Menu_Library
         public GameObject   canvas;
         public float        framePressCooldown = 0;
 
-        public int currentPage;
+        public int          currentPage;
 
         public List<PageTemplate> menuPages = new List<PageTemplate>();
 

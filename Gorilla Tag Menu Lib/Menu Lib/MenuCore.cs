@@ -11,14 +11,6 @@ using UnityEngine.UI;
 
 TODO:
 
--- Add a page system, more info:
--=- DrawCall() Will not handle the drawing of buttons, it will draw pages and the actual page objects will themselfs handle their own buttons instead of buttons being global within the menu object example functions:
-==> SetPage(int page); ChangePageBy(int page) (1, -1)
-
--- More button / page configurability
--=- More configurability of how the buttons are rendered on the menu (the page when that's implemented)
-==> page.spaceBetweenButtons, button.btnWidth, button.btnHeight
-
 -- Menu animation
 -=- Ability to animate the menu, like adding a fast scaling up animation when first opening the menu. Will add animation presets
 ==> AddStartAnim(AnimEnum anim, float animSpeed); AddOpeningAnim(AnimEnum anim, float animSpeed)
