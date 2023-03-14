@@ -38,15 +38,15 @@ namespace Menu_Library
                 {
                     menu.reference = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                     Destroy(menu.reference.GetComponent<MeshRenderer>());
-                    
+
                     // Probably exists a better way of doing this lol
                     if (menu.menuPivotPoint == GorillaLocomotion.Player.Instance.rightHandTransform)
                         menu.reference.transform.parent = GorillaLocomotion.Player.Instance.leftHandTransform;
                     else
                         menu.reference.transform.parent = GorillaLocomotion.Player.Instance.rightHandTransform;
 
-                    menu.reference.transform.localPosition =  new Vector3(0f, -0.1f, 0f);
-                    menu.reference.transform.localScale =     new Vector3(0.01f, 0.01f, 0.01f);
+                    menu.reference.transform.localPosition = new Vector3(0f, -0.1f, 0f);
+                    menu.reference.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
                 }
             }
 
@@ -177,7 +177,7 @@ namespace Menu_Library
         public static void RefreshMenu()
         {
             if (currentlyDrawnMenu == null)
-                return;
+                return;:
 
             Destroy(currentlyDrawnMenu);
             currentlyDrawnMenu = null;
