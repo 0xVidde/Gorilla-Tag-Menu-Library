@@ -21,11 +21,10 @@ namespace Menu_Library
                         if (btn.btnWillToggle)
                             btn.btnState = !btn.btnState;
 
-                        btn.btnAction.Invoke();
+                        if (btn.btnAction != null)
+                            btn.btnAction.Invoke();
 
                         menu.framePressCooldown = Time.frameCount;
-
-                        MenuLogger.Log("Activated Button: " + btn.btnTitle);
 
                         MenuCore.RefreshMenu();
                     }

@@ -13,7 +13,7 @@ TODO:
 
 -- Menu animation
 -=- Ability to animate the menu, like adding a fast scaling up animation when first opening the menu. Will add animation presets
-==> AddStartAnim(AnimEnum anim, float animSpeed); AddOpeningAnim(AnimEnum anim, float animSpeed)
+==> AddStartAnim(AnimTemplate anim, float animSpeed); AddOpeningAnim(AnimTemplate anim, float animSpeed)
 
 */
 
@@ -23,6 +23,11 @@ namespace Menu_Library
     {
         private static GameObject currentlyDrawnMenu;
 
+        /// <summary>
+        /// The function you want to call every frame to draw your desired menu. 
+        /// </summary>
+        /// <param name="menu">The MenuTemplate object that you want to draw</param>
+        /// <param name="menuStateDepender">The bool that the menu depends on when drawing; for exmaple: if you pass in a right controller grip bool then the menu will only render when holding down grip on the right controller</param>
         public static void DrawUpdate(MenuTemplate menu, bool menuStateDepender)
         {
             if (menuStateDepender && menu.menuRoot == null)
@@ -40,8 +45,8 @@ namespace Menu_Library
                     else
                         menu.reference.transform.parent = GorillaLocomotion.Player.Instance.rightHandTransform;
 
-                    menu.reference.transform.localPosition = new Vector3(0f, -0.1f, 0f);
-                    menu.reference.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
+                    menu.reference.transform.localPosition =  new Vector3(0f, -0.1f, 0f);
+                    menu.reference.transform.localScale =     new Vector3(0.01f, 0.01f, 0.01f);
                 }
             }
 
@@ -60,7 +65,7 @@ namespace Menu_Library
             }
         }
 
-        public static void DrawCall(MenuTemplate menu)
+        private static void DrawCall(MenuTemplate menu)
         {
             menu.menuRoot = new GameObject(menu.menuTitle + " Root");
             menu.menuRoot.transform.localScale = new Vector3(0.1f, 0.3f, 0.4f);
@@ -105,8 +110,6 @@ namespace Menu_Library
             titleTransform.sizeDelta = new Vector2(0.28f, 0.05f);
             titleTransform.position = new Vector3(0.06f, 0f, 0.175f);
             titleTransform.rotation = Quaternion.Euler(new Vector3(180f, 90f, 90f));
-
-            MenuLogger.Log(menu.currentPage.ToString());
 
             DrawButtons(menu);
         }
@@ -168,8 +171,14 @@ namespace Menu_Library
             }
         } 
 
+        /// <summary>
+        /// Redraws the menu
+        /// </summary>
         public static void RefreshMenu()
         {
+            if (currentlyDrawnMenu == null)
+                return;
+
             Destroy(currentlyDrawnMenu);
             currentlyDrawnMenu = null;
         }

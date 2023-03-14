@@ -25,13 +25,13 @@ namespace Gorilla_Tag_Mod_Menu_Library
 
     [HarmonyPatch(typeof(GorillaLocomotion.Player))]
     [HarmonyPatch("FixedUpdate", MethodType.Normal)]
-    public class MainPatch
+    public class ExampleClass
     {
         public static MenuTemplate menu;
 
         static bool init = true;
 
-        // The function that's ran when a button is pressed
+        // Increases the menu's currentPage when called
         private static void IncreasePage()
         {
             if (menu.currentPage + 1 > menu.menuPages.Count)
@@ -40,6 +40,7 @@ namespace Gorilla_Tag_Mod_Menu_Library
             menu.currentPage = menu.currentPage + 1;
         }
 
+        // Decreases the menu's currentPage when called
         private static void DecreasePage()
         {
             if (menu.currentPage - 1 < menu.menuPages.Count)
@@ -48,6 +49,7 @@ namespace Gorilla_Tag_Mod_Menu_Library
             menu.currentPage = menu.currentPage - 1;
         }
 
+        // Test function
         private static void TEST()
         {
             Debug.Log("TEST");
@@ -55,6 +57,7 @@ namespace Gorilla_Tag_Mod_Menu_Library
 
         static void Prefix(GorillaLocomotion.Player __instance)
         {
+            // Everything here will be called once at the start. All this does it just inits every menu object
             if (init)
             {
                 // menu innit                   // Title              // Size            // Colour                     // Where you want the menu to be
@@ -95,18 +98,11 @@ namespace Gorilla_Tag_Mod_Menu_Library
                 init = false;
             }
 
-            // Ignore this, here just because of testing
-            // -----
-            bool leftControllerGrip;
-
-            List<InputDevice> leftList = new List<InputDevice>();
-            InputDevices.GetDevicesWithCharacteristics(InputDeviceCharacteristics.HeldInHand | InputDeviceCharacteristics.Left | InputDeviceCharacteristics.Controller, leftList);
-
-            leftList[0].TryGetFeatureValue(CommonUsages.gripButton, out leftControllerGrip);
-            // -----
+            // Gets the controller input through the InputHandler inside this lib ;)
+            Menu_Lib.Input.InputEnum input = Menu_Lib.Input.InputHandler.GetControllerInput();
 
             // The actual draw update call, needs to be ran every frame
-            MenuCore.DrawUpdate(menu, leftControllerGrip);
+            MenuCore.DrawUpdate(menu, input.isHoldingLeftGrip);
         }
     }
 }

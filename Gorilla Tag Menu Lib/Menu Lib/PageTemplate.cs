@@ -13,16 +13,28 @@ namespace Gorilla_Tag_Menu_Lib.Menu_Lib
         public float btnWidth  = 0.5f;
         public float btnHeight = 0.09f;
 
+        /// <summary>
+        /// Returns new PageTemplate object
+        /// </summary>
+        /// <returns></returns>
         public static PageTemplate CreatePage()
         {
             return new PageTemplate();
         }
 
+        /// <summary>
+        /// Adds ButtonTemplate to already existing PageTemplate object
+        /// </summary>
+        /// <param name="button">The desired ButtonTemplate object to be added</param>
         public void AddButton(ButtonTemplate button)
         {
             pageButtons.Add(button);
         }
 
+        /// <summary>
+        /// Wrapper for AddButton(ButtonTemplate button). Used to add an array of ButtonTemplate instead of one at a time.
+        /// </summary>
+        /// <param name="button">The desired ButtonTemplate array to be added</param>
         public void AddButton(ButtonTemplate[] buttons)
         {
             foreach (ButtonTemplate button in buttons)

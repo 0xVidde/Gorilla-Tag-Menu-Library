@@ -22,7 +22,14 @@ namespace Menu_Library
 
         public List<PageTemplate> menuPages = new List<PageTemplate>();
 
-
+        /// <summary>
+        /// Returns a MenuTemplate object using the passed arguments
+        /// </summary>
+        /// <param name="newTitle">The title of the new menu</param>
+        /// <param name="newSize">The size of the new menu</param>
+        /// <param name="newColor">The color of the new menu</param>
+        /// <param name="newPivot">The gameobject that the menu will be located at, for example: __instance.rightHandTransform.gameobject, __instance.leftHandTransform.gameobject</param>
+        /// <returns></returns>
         public static MenuTemplate CreateMenu(string newTitle, Vector3 newSize, Color newColor, GameObject newPivot)
         {
             MenuTemplate newMenu = new MenuTemplate();
@@ -39,6 +46,10 @@ namespace Menu_Library
             return newMenu;
         }
 
+        /// <summary>
+        /// Adds PageTemplate to already existing MenuTemplate object
+        /// </summary>
+        /// <param name="button">The desired PageTemplate object to be added</param>
         public void AddPage(PageTemplate page)
         {
             menuPages.Add(page);
@@ -46,14 +57,10 @@ namespace Menu_Library
             MenuLogger.Log("Added Button To " + menuTitle);
         }
 
-        public void AddPage(PageTemplate[] page)
-        {
-            foreach (PageTemplate pageToAdd in menuPages)
-            {
-                AddPage(pageToAdd);
-            }
-        }
-
+        /// <summary>
+        /// Returns the currently selected PageTemplate object
+        /// </summary>
+        /// <returns></returns>
         public PageTemplate GetCurrentPage()
         {
             return menuPages[currentPage];

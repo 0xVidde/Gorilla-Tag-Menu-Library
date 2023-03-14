@@ -15,6 +15,13 @@ namespace Menu_Library
 
         public bool     btnDisabled;
 
+        /// <summary>
+        /// Returns a new button object using the passed arguments
+        /// </summary>
+        /// <param name="newTitle">Title of new button</param>
+        /// <param name="newAction">The function the button will run when activated</param>
+        /// <param name="newWillToggle">If the button will be toggleable or if it will just run the function without being turned on or off, button will be gray if this is false</param>
+        /// <returns></returns>
         public static ButtonTemplate CreateButton(string newTitle, Action newAction, bool newWillToggle = true)
         {
             ButtonTemplate newButton = new ButtonTemplate();
