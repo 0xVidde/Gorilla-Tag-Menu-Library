@@ -34,13 +34,19 @@ namespace Gorilla_Tag_Mod_Menu_Library
         // Increases the menu's currentPage when called
         private static void IncreasePage()
         {
-            menu.currentPage = menu.currentPage + 1;
+            int page = menu.currentPage + 1;
+
+            if (menu.CheckPageValidity(page))
+                menu.currentPage = page;
         }
 
         // Decreases the menu's currentPage when called
         private static void DecreasePage()
         {
-            menu.currentPage = menu.currentPage - 1;
+            int page = menu.currentPage - 1;
+
+            if (menu.CheckPageValidity(page))
+                menu.currentPage = page;
         }
 
         // Test function

@@ -65,5 +65,13 @@ namespace Menu_Library
         {
             return menuPages[currentPage];
         }
+
+        public bool CheckPageValidity(int page)
+        {
+            if (page > menuPages.Count || page < menuPages.Count)
+                return false;
+
+            return true;
+        }
     }
 }
