@@ -13,6 +13,11 @@ namespace Gorilla_Tag_Menu_Lib.Menu_Lib
         public float btnWidth  = 0.5f;
         public float btnHeight = 0.09f;
 
+        public Color btnOnColor = Color.green;
+        public Color btnOffColor = Color.red;
+        public Color btnDisabledColor = Color.black;
+        public Color btnNotTogColor = Color.gray;
+
         /// <summary>
         /// Returns new PageTemplate object
         /// </summary>

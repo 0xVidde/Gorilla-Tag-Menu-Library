@@ -111,6 +111,8 @@ namespace Menu_Library
             titleTransform.position = new Vector3(0.06f, 0f, 0.175f);
             titleTransform.rotation = Quaternion.Euler(new Vector3(180f, 90f, 90f));
 
+            titleObj.AddComponent<Text>().horizontalOverflow = HorizontalWrapMode.Wrap;
+
             DrawButtons(menu);
         }
 
@@ -153,15 +155,15 @@ namespace Menu_Library
                         titleTransform.rotation = Quaternion.Euler(new Vector3(180f, 90f, 90f));
 
                         if (button.btnState)
-                            buttonRoot.GetComponent<Renderer>().material.color = Color.green;
+                            buttonRoot.GetComponent<Renderer>().material.color = menu.menuPages[menu.currentPage].btnOnColor;
                         else
-                            buttonRoot.GetComponent<Renderer>().material.color = Color.red;
+                            buttonRoot.GetComponent<Renderer>().material.color = menu.menuPages[menu.currentPage].btnOffColor;
 
                         if (button.btnDisabled)
-                            buttonRoot.GetComponent<Renderer>().material.color = Color.black;
+                            buttonRoot.GetComponent<Renderer>().material.color = menu.menuPages[menu.currentPage].btnDisabledColor;
 
                         if (!button.btnWillToggle)
-                            buttonRoot.GetComponent<Renderer>().material.color = Color.gray;
+                            buttonRoot.GetComponent<Renderer>().material.color = menu.menuPages[menu.currentPage].btnNotTogColor;
 
                         btnIndex++;
                     }
@@ -177,7 +179,7 @@ namespace Menu_Library
         public static void RefreshMenu()
         {
             if (currentlyDrawnMenu == null)
-                return;:
+                return;
 
             Destroy(currentlyDrawnMenu);
             currentlyDrawnMenu = null;

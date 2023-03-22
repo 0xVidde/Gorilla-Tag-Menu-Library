@@ -14,7 +14,7 @@ namespace Gorilla_Tag_Mod_Menu_Library
     {
         private const string modGUID = "GT.Menu.Lib";
         private const string modName = "An Example For Vidde's Gorilla Tag Menu Library";
-        private const string modVersion = "0.0.2";
+        private const string modVersion = "0.0.3";
 
         public void Awake()
         {

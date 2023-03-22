@@ -9,8 +9,6 @@ namespace Menu_Library
 
         private void OnTriggerEnter(Collider collider)
         {
-            Debug.Log("TEST");
-
             if (Time.frameCount >= menu.framePressCooldown + 30)
             {
                 foreach (ButtonTemplate btn in menu.menuPages[menu.currentPage].pageButtons)
