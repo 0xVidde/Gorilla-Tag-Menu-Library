@@ -248,6 +248,7 @@
     <Compile Include="Example Class.cs" />
     <Compile Include="Menu Lib\ButtonCollisionHandler.cs" />
     <Compile Include="Menu Lib\ButtonTemplate.cs" />
+    <Compile Include="Menu Lib\FontEnum.cs" />
     <Compile Include="Menu Lib\InputEnum.cs" />
     <Compile Include="Menu Lib\InputHandler.cs" />
     <Compile Include="Menu Lib\MenuCore.cs" />

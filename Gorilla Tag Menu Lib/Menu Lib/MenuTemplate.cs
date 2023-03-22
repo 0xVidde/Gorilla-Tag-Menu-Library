@@ -10,7 +10,9 @@ namespace Menu_Library
         public string       menuTitle;
         public Vector3      menuSize;
         public Color        menuColor;
+
         public Color        menuTextColor = Color.white;
+        public string       menuFont = FontEnum.ArialFont;
 
         public GameObject   menuPivotPoint;
 

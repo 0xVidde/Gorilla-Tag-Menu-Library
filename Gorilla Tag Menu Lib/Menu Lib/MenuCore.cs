@@ -99,7 +99,7 @@ namespace Menu_Library
             GameObject titleObj = new GameObject();
             titleObj.transform.parent = menu.canvas.transform;
             Text title = titleObj.AddComponent<Text>();
-            title.font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
+            title.font = Resources.GetBuiltinResource(typeof(Font), menu.menuFont) as Font;
             title.text = menu.menuTitle;
             title.fontSize = 1;
             title.alignment = TextAnchor.MiddleCenter;
@@ -143,9 +143,10 @@ namespace Menu_Library
                         GameObject titleObj = new GameObject();
                         titleObj.transform.parent = menu.canvas.transform;
                         Text title = titleObj.AddComponent<Text>();
-                        title.font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
+                        title.font = Resources.GetBuiltinResource(typeof(Font), button.btnFont) as Font;
                         title.text = button.btnTitle;
                         title.fontSize = 1;
+                        title.color = button.btnTextColor;
                         title.alignment = TextAnchor.MiddleCenter;
                         title.resizeTextForBestFit = true;
                         title.resizeTextMinSize = 0;

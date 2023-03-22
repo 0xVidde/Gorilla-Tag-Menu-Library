@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Gorilla_Tag_Menu_Lib.Menu_Lib;
+using System;
 using UnityEngine;
 
 namespace Menu_Library
@@ -14,6 +15,9 @@ namespace Menu_Library
         public bool     btnState;
 
         public bool     btnDisabled;
+
+        public Color    btnTextColor = Color.white;
+        public string   btnFont = FontEnum.ArialFont;
 
         /// <summary>
         /// Returns a new button object using the passed arguments
