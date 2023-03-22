@@ -131,6 +131,7 @@ namespace Menu_Library
                         GameObject buttonRoot = GameObject.CreatePrimitive(PrimitiveType.Cube);
 
                         Destroy(buttonRoot.GetComponent<Rigidbody>());
+
                         buttonRoot.AddComponent<ButtonCollisionHandler>().button = button;
                         buttonRoot.GetComponent<ButtonCollisionHandler>().menu = menu;
                         buttonRoot.GetComponent<BoxCollider>().isTrigger = true;
@@ -142,6 +143,7 @@ namespace Menu_Library
 
                         GameObject titleObj = new GameObject();
                         titleObj.transform.parent = menu.canvas.transform;
+
                         Text title = titleObj.AddComponent<Text>();
                         title.font = Resources.GetBuiltinResource(typeof(Font), button.btnFont) as Font;
                         title.text = button.btnTitle;
@@ -150,6 +152,7 @@ namespace Menu_Library
                         title.alignment = TextAnchor.MiddleCenter;
                         title.resizeTextForBestFit = true;
                         title.resizeTextMinSize = 0;
+
                         RectTransform titleTransform = title.GetComponent<RectTransform>();
                         titleTransform.localPosition = Vector3.zero;
                         titleTransform.sizeDelta = new Vector2(0.2f, 0.03f);
@@ -163,11 +166,11 @@ namespace Menu_Library
                         else
                             buttonRoot.GetComponent<Renderer>().material.color = currentPage.btnOffColor;
 
-                        if (button.btnDisabled)
-                            buttonRoot.GetComponent<Renderer>().material.color = currentPage.btnDisabledColor;
-
                         if (!button.btnWillToggle)
                             buttonRoot.GetComponent<Renderer>().material.color = currentPage.btnNotTogColor;
+
+                        if (button.btnDisabled)
+                            buttonRoot.GetComponent<Renderer>().material.color = currentPage.btnDisabledColor;
 
                         btnIndex++;
                     }

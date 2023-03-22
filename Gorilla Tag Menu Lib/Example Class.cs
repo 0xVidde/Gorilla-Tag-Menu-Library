@@ -50,7 +50,7 @@ namespace Gorilla_Tag_Mod_Menu_Library
         // Test function
         private static void TEST()
         {
-            Debug.Log("TEST");
+            MenuLogger.Log("TEST");
         }
 
         static void Prefix(GorillaLocomotion.Player __instance)
