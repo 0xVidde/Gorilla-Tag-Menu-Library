@@ -103,6 +103,7 @@ namespace Menu_Library
             title.text = menu.menuTitle;
             title.fontSize = 1;
             title.alignment = TextAnchor.MiddleCenter;
+            title.color = menu.menuTextColor;
             title.resizeTextForBestFit = true;
             title.resizeTextMinSize = 0;
             RectTransform titleTransform = title.GetComponent<RectTransform>();
