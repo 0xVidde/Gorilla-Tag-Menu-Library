@@ -32,7 +32,7 @@ namespace Menu_Library
         /// <param name="newSize">The size of the new menu</param>
         /// <param name="newColor">The color of the new menu</param>
         /// <param name="newPivot">The gameobject that the menu will be located at, for example: __instance.rightHandTransform.gameobject, __instance.leftHandTransform.gameobject</param>
-        /// <returns></returns>
+        /// <returns>New Menu Object</returns>
         public static MenuTemplate CreateMenu(string newTitle, Vector3 newSize, Color newColor, GameObject newPivot)
         {
             MenuTemplate newMenu = new MenuTemplate();
@@ -63,7 +63,7 @@ namespace Menu_Library
         /// <summary>
         /// Returns the currently selected PageTemplate object
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Currently selected page</returns>
         public PageTemplate GetCurrentPage()
         {
             return menuPages[currentPage];
