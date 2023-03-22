@@ -66,6 +66,7 @@ namespace Menu_Library
             return menuPages[currentPage];
         }
 
+        // Not working currently
         public bool CheckPageValidity(int page)
         {
             if (page > menuPages.Count || page < menuPages.Count)

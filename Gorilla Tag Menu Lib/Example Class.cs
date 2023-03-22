@@ -36,8 +36,7 @@ namespace Gorilla_Tag_Mod_Menu_Library
         {
             int page = menu.currentPage + 1;
 
-            if (menu.CheckPageValidity(page))
-                menu.currentPage = page;
+            menu.currentPage = page;
         }
 
         // Decreases the menu's currentPage when called
@@ -45,8 +44,7 @@ namespace Gorilla_Tag_Mod_Menu_Library
         {
             int page = menu.currentPage - 1;
 
-            if (menu.CheckPageValidity(page))
-                menu.currentPage = page;
+            menu.currentPage = page;
         }
 
         // Test function

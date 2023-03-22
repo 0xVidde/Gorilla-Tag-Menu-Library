@@ -111,7 +111,7 @@ namespace Menu_Library
             titleTransform.position = new Vector3(0.06f, 0f, 0.175f);
             titleTransform.rotation = Quaternion.Euler(new Vector3(180f, 90f, 90f));
 
-            titleObj.AddComponent<Text>().horizontalOverflow = HorizontalWrapMode.Wrap;
+            title.horizontalOverflow = HorizontalWrapMode.Wrap;
 
             DrawButtons(menu);
         }
@@ -154,16 +154,18 @@ namespace Menu_Library
                         titleTransform.localPosition = new Vector3(0.064f, 0f, 0.111f - ((btnIndex * page.btnSpace) / 2.55f));
                         titleTransform.rotation = Quaternion.Euler(new Vector3(180f, 90f, 90f));
 
+                        PageTemplate currentPage = menu.GetCurrentPage();
+
                         if (button.btnState)
-                            buttonRoot.GetComponent<Renderer>().material.color = menu.menuPages[menu.currentPage].btnOnColor;
+                            buttonRoot.GetComponent<Renderer>().material.color = currentPage.btnOnColor;
                         else
-                            buttonRoot.GetComponent<Renderer>().material.color = menu.menuPages[menu.currentPage].btnOffColor;
+                            buttonRoot.GetComponent<Renderer>().material.color = currentPage.btnOffColor;
 
                         if (button.btnDisabled)
-                            buttonRoot.GetComponent<Renderer>().material.color = menu.menuPages[menu.currentPage].btnDisabledColor;
+                            buttonRoot.GetComponent<Renderer>().material.color = currentPage.btnDisabledColor;
 
                         if (!button.btnWillToggle)
-                            buttonRoot.GetComponent<Renderer>().material.color = menu.menuPages[menu.currentPage].btnNotTogColor;
+                            buttonRoot.GetComponent<Renderer>().material.color = currentPage.btnNotTogColor;
 
                         btnIndex++;
                     }
