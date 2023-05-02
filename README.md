@@ -5,14 +5,10 @@
 # Menu Maker 3000
 
 This is a simple but powerful mod menu creation tool for the VR game Gorilla Tag.
-## Acknowledgements
-
- - [Best Youtube Channel On The Earth](https://www.youtube.com/@elvidde9201)
- - [My Discord](https://discord.gg/bX5VQt2x6Q)
 
 ## Authors
 
-- [@0xVidde](https://www.youtube.com/@elvidde9201)
+- [@0xVidde#1337]()
 
 
 ## FAQ
