@@ -109,7 +109,7 @@ namespace Menu_Library
             RectTransform titleTransform = title.GetComponent<RectTransform>();
             titleTransform.localPosition = Vector3.zero;
             titleTransform.sizeDelta = new Vector2(0.28f, 0.05f);
-            titleTransform.position = new Vector3(0.06f, 0f, 0.175f);
+            titleTransform.position = new Vector3(0.10f, 0f, 0.175f);
             titleTransform.rotation = Quaternion.Euler(new Vector3(180f, 90f, 90f));
 
             // overflow check, remove if not wanted
