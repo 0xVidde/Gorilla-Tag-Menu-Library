@@ -13,7 +13,7 @@ namespace Menu_Lib.Input
         public bool isHoldingRightTrigger;
         public bool isHoldingLeftTrigger;
 
-        public bool isHoldingRighPrimaryButton;
+        public bool isHoldingRightPrimaryButton;
         public bool isHoldingRightSecondaryButton;
         public bool isHoldingLeftPrimaryButton;
         public bool isHoldingLeftSecondaryButton;

@@ -17,7 +17,7 @@ namespace Menu_Lib.Input
             bool isHoldingRightTrigger;
             bool isHoldingLeftTrigger;
 
-            bool isHoldingRighPrimaryButton;
+            bool isHoldingRightPrimaryButton;
             bool isHoldingRightSecondaryButton;
 
             bool isHoldingLeftPrimaryButton;
@@ -43,7 +43,7 @@ namespace Menu_Lib.Input
             rightList[0].TryGetFeatureValue(CommonUsages.trigger, out rightTriggerValue);
             leftList[0].TryGetFeatureValue(CommonUsages.trigger, out leftTriggerValue);
 
-            rightList[0].TryGetFeatureValue(CommonUsages.primaryButton, out isHoldingRighPrimaryButton);
+            rightList[0].TryGetFeatureValue(CommonUsages.primaryButton, out isHoldingRightPrimaryButton);
             rightList[0].TryGetFeatureValue(CommonUsages.secondaryButton, out isHoldingRightSecondaryButton);
 
             leftList[0].TryGetFeatureValue(CommonUsages.primaryButton, out isHoldingLeftPrimaryButton);
@@ -56,7 +56,7 @@ namespace Menu_Lib.Input
                 isHoldingRightTrigger = isHoldingRightTrigger,
                 isHoldingLeftTrigger = isHoldingLeftTrigger,
 
-                isHoldingRighPrimaryButton = isHoldingRighPrimaryButton,
+                isHoldingRightPrimaryButton = isHoldingRightPrimaryButton,
                 isHoldingRightSecondaryButton = isHoldingRightSecondaryButton,
 
                 isHoldingLeftPrimaryButton = isHoldingLeftPrimaryButton,
