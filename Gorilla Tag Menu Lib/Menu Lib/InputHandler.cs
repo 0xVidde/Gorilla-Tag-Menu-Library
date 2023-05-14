@@ -17,6 +17,12 @@ namespace Menu_Lib.Input
             bool isHoldingRightTrigger;
             bool isHoldingLeftTrigger;
 
+            bool isHoldingRighPrimaryButton;
+            bool isHoldingRightSecondaryButton;
+
+            bool isHoldingLeftPrimaryButton;
+            bool isHoldingLeftSecondaryButton;
+
             float rightGripValue;
             float leftGripValue;
             float rightTriggerValue;
@@ -37,12 +43,24 @@ namespace Menu_Lib.Input
             rightList[0].TryGetFeatureValue(CommonUsages.trigger, out rightTriggerValue);
             leftList[0].TryGetFeatureValue(CommonUsages.trigger, out leftTriggerValue);
 
+            rightList[0].TryGetFeatureValue(CommonUsages.primaryButton, out isHoldingRighPrimaryButton);
+            rightList[0].TryGetFeatureValue(CommonUsages.secondaryButton, out isHoldingRightSecondaryButton);
+
+            leftList[0].TryGetFeatureValue(CommonUsages.primaryButton, out isHoldingLeftPrimaryButton);
+            leftList[0].TryGetFeatureValue(CommonUsages.secondaryButton, out isHoldingLeftSecondaryButton);
+
             var input = new InputEnum
             {
                 isHoldingRightGrip = isHoldingRightGrip,
                 isHoldingLeftGrip = isHoldingLeftGrip,
                 isHoldingRightTrigger = isHoldingRightTrigger,
                 isHoldingLeftTrigger = isHoldingLeftTrigger,
+
+                isHoldingRighPrimaryButton = isHoldingRighPrimaryButton,
+                isHoldingRightSecondaryButton = isHoldingRightSecondaryButton,
+
+                isHoldingLeftPrimaryButton = isHoldingLeftPrimaryButton,
+                isHoldingLeftSecondaryButton = isHoldingLeftSecondaryButton,
 
                 rightGripValue = rightGripValue,
                 leftGripValue = leftGripValue,
