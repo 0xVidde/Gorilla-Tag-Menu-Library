@@ -67,7 +67,7 @@ namespace Menu_Library
 
         private static void DrawCall(MenuTemplate menu)
         {
-            menu.menuRoot = new GameObject(menu.menuTitle + " Root");
+            menu.menuRoot = new GameObject("[Menumaker 3000] " + menu.menuTitle + " Root");
             menu.menuRoot.transform.localScale = new Vector3(0.1f, 0.3f, 0.4f);
 
             currentlyDrawnMenu = menu.menuRoot;
