@@ -184,7 +184,7 @@ namespace Menu_Library
         /// <summary>
         /// Redraws the menu
         /// </summary>
-        public static void RefreshMenu()
+        public static void RefreshCurrentMenu()
         {
             if (currentlyDrawnMenu == null)
                 return;

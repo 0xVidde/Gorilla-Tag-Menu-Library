@@ -9,7 +9,7 @@ namespace Menu_Library
 
         private void OnTriggerEnter(Collider collider)
         {
-            if (Time.frameCount >= menu.framePressCooldown + 30)
+            if (Time.frameCount >= menu.framePressCooldownTimer + menu.btnCooldownTime)
             {
                 foreach (ButtonTemplate btn in menu.menuPages[menu.currentPage].pageButtons)
                 {
@@ -24,9 +24,9 @@ namespace Menu_Library
                         if (btn.btnAction != null)
                             btn.btnAction.Invoke();
 
-                        menu.framePressCooldown = Time.frameCount;
+                        menu.framePressCooldownTimer = Time.frameCount;
 
-                        MenuCore.RefreshMenu();
+                        MenuCore.RefreshCurrentMenu();
                     }
                 }
             }

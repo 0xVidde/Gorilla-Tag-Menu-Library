@@ -19,7 +19,8 @@ namespace Menu_Library
         public GameObject   menuRoot;
         public GameObject   reference;
         public GameObject   canvas;
-        public float        framePressCooldown = 0;
+        public float        framePressCooldownTimer = 0;
+        public float        btnCooldownTime = 30;
 
         public int          currentPage;
 
